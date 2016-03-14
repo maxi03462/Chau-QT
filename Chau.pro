@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql
+QT       += core gui sql widgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -13,11 +13,14 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        chau.cpp
+        chau.cpp \
+    nuevo.cpp
 
-HEADERS  += chau.h
+HEADERS  += chau.h \
+    nuevo.h
 
-FORMS    += chau.ui
+FORMS    += chau.ui \
+    nuevo.ui
 
 CONFIG += mobility
 MOBILITY = 

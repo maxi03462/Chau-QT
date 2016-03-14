@@ -1,10 +1,12 @@
 #ifndef CHAU_H
 #define CHAU_H
 
+#include "nuevo.h"
 #include <QMainWindow>
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
 #include <QtSql/QSqlError>
+#include <QtWidgets>
 
 namespace Ui {
 class Chau;
@@ -33,6 +35,7 @@ private slots:
 private:
     Ui::Chau *ui;
     QSqlDatabase db;
+    nuevo *ventana;
 };
 
 #endif // CHAU_H

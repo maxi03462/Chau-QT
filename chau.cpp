@@ -28,7 +28,8 @@ void Chau::on_actionListas_triggered()
 
 void Chau::on_actionNuevo_triggered()
 {
-
+    ventana = new nuevo();
+    ventana->showMaximized();
 }
 
 void Chau::on_actionVisualizar_triggered()
