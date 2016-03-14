@@ -2,6 +2,9 @@
 #define CHAU_H
 
 #include <QMainWindow>
+#include <QtSql/QSqlDatabase>
+#include <QtSql/QSqlQuery>
+#include <QtSql/QSqlError>
 
 namespace Ui {
 class Chau;
@@ -24,8 +27,12 @@ private slots:
 
     void on_actionExportar_triggered();
 
+    void creartabla1();
+    void creartabla2();
+
 private:
     Ui::Chau *ui;
+    QSqlDatabase db;
 };
 
 #endif // CHAU_H
