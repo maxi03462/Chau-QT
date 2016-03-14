@@ -14,6 +14,7 @@ Chau::Chau(QWidget *parent) :
     db.open();
     creartabla1();
     creartabla2();
+
 }
 
 Chau::~Chau()
@@ -28,7 +29,7 @@ void Chau::on_actionListas_triggered()
 
 void Chau::on_actionNuevo_triggered()
 {
-    ventana = new nuevo();
+    ventana = new nuevo(this);
     ventana->showMaximized();
 }
 
@@ -57,4 +58,13 @@ void Chau::creartabla2()
     QString Consulta ="CREATE TABLE IF NOT EXISTS 'M0TIV0S'(motivo VARCHAR(255));";
     QSqlQuery crear;
     qDebug() << "Se creo la tabla2?: " << crear.exec(Consulta);
+}
+
+void Chau::tablaActual(QString tabla)
+{
+    QFile file("List.info");
+    file.open(QIODevice::Text | QIODevice::WriteOnly);
+    QTextStream out(&file);
+    out << tabla;
+    file.close();
 }

@@ -16,6 +16,7 @@ class nuevo : public QMainWindow
 
 public:
     explicit nuevo(QWidget *parent = 0);
+    void teEscribo(&QString dato);
     ~nuevo();
 
 private slots:

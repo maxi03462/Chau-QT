@@ -7,6 +7,7 @@ nuevo::nuevo(QWidget *parent) :
     ui(new Ui::nuevo)
 {
     ui->setupUi(this);
+    pParent = parent;
 }
 
 nuevo::~nuevo()

@@ -7,6 +7,9 @@
 #include <QtSql/QSqlQuery>
 #include <QtSql/QSqlError>
 #include <QtWidgets>
+#include <QString>
+#include <QFile>
+#include <QTextStream>
 
 namespace Ui {
 class Chau;
@@ -32,10 +35,12 @@ private slots:
     void creartabla1();
     void creartabla2();
 
+    void tablaActual(QString tabla);
 private:
     Ui::Chau *ui;
     QSqlDatabase db;
     nuevo *ventana;
+
 };
 
 #endif // CHAU_H
