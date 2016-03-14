@@ -12,3 +12,27 @@ Chau::~Chau()
 {
     delete ui;
 }
+
+
+
+
+
+void Chau::on_actionListas_triggered()
+{
+
+}
+
+void Chau::on_actionNuevo_triggered()
+{
+
+}
+
+void Chau::on_actionVisualizar_triggered()
+{
+
+}
+
+void Chau::on_actionExportar_triggered()
+{
+
+}
