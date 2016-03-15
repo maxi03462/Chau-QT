@@ -2,6 +2,7 @@
 #define CHAU_H
 
 #include "nuevo.h"
+#include "nuevomotivo.h"
 #include <QMainWindow>
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
@@ -43,6 +44,7 @@ private:
     Ui::Chau *ui;
     QSqlDatabase db;
     nuevo *ventana;
+    NuevoMotivo *ventanamotivo;
 
 };
 

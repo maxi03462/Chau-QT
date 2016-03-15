@@ -21,7 +21,7 @@
        <widget class="QLabel" name="label">
         <property name="font">
          <font>
-          <pointsize>25</pointsize>
+          <pointsize>20</pointsize>
          </font>
         </property>
         <property name="text">
@@ -36,7 +36,7 @@
        <widget class="QLineEdit" name="lineEdit">
         <property name="font">
          <font>
-          <pointsize>25</pointsize>
+          <pointsize>20</pointsize>
          </font>
         </property>
        </widget>
@@ -45,7 +45,7 @@
        <widget class="QLabel" name="label_2">
         <property name="font">
          <font>
-          <pointsize>25</pointsize>
+          <pointsize>20</pointsize>
          </font>
         </property>
         <property name="text">
@@ -60,7 +60,7 @@
        <widget class="QComboBox" name="comboBox">
         <property name="font">
          <font>
-          <pointsize>25</pointsize>
+          <pointsize>20</pointsize>
          </font>
         </property>
        </widget>
@@ -69,7 +69,7 @@
        <widget class="QLabel" name="label_5">
         <property name="font">
          <font>
-          <pointsize>25</pointsize>
+          <pointsize>20</pointsize>
          </font>
         </property>
         <property name="text">
@@ -84,37 +84,23 @@
        <widget class="QLineEdit" name="lineEdit_2">
         <property name="font">
          <font>
-          <pointsize>25</pointsize>
+          <pointsize>20</pointsize>
          </font>
         </property>
        </widget>
       </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
-       <widget class="Line" name="line_2">
-        <property name="frameShadow">
-         <enum>QFrame::Plain</enum>
-        </property>
+       <spacer name="verticalSpacer">
         <property name="orientation">
-         <enum>Qt::Horizontal</enum>
+         <enum>Qt::Vertical</enum>
         </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QTableWidget" name="tableWidget"/>
-      </item>
-      <item>
-       <widget class="Line" name="line">
-        <property name="frameShadow">
-         <enum>QFrame::Plain</enum>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
         </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-       </widget>
+       </spacer>
       </item>
      </layout>
     </item>
@@ -124,7 +110,7 @@
        <widget class="QLabel" name="label_4">
         <property name="font">
          <font>
-          <pointsize>25</pointsize>
+          <pointsize>20</pointsize>
          </font>
         </property>
         <property name="text">
@@ -141,7 +127,7 @@
          <widget class="QPushButton" name="pushButton">
           <property name="font">
            <font>
-            <pointsize>25</pointsize>
+            <pointsize>20</pointsize>
            </font>
           </property>
           <property name="text">
@@ -168,7 +154,7 @@
          <widget class="QPushButton" name="pushButton_2">
           <property name="font">
            <font>
-            <pointsize>25</pointsize>
+            <pointsize>20</pointsize>
            </font>
           </property>
           <property name="text">
@@ -205,22 +191,22 @@
   </widget>
   <action name="actionListas">
    <property name="text">
-    <string>Listas</string>
+    <string>Ver Listas</string>
    </property>
   </action>
   <action name="actionNuevo">
    <property name="text">
-    <string>Nuevo</string>
+    <string>Nueva Lista</string>
    </property>
   </action>
   <action name="actionVisualizar">
    <property name="text">
-    <string>Visualizar</string>
+    <string>Visualizar Registros</string>
    </property>
   </action>
   <action name="actionExportar">
    <property name="text">
-    <string>Exportar</string>
+    <string>Exportar Registros</string>
    </property>
   </action>
   <action name="actionMotivos">

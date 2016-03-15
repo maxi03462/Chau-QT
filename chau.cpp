@@ -79,7 +79,8 @@ void Chau::SettablaActual(QString tabla)
 
 void Chau::on_actionMotivos_triggered()
 {
-
+    ventanamotivo = new NuevoMotivo();
+    ventanamotivo->showMaximized();
 }
 
 void Chau::cargarmotivos()
