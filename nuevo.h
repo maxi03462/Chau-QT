@@ -5,7 +5,9 @@
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
 #include <QtSql/QSqlError>
+#include "chau.h"
 
+class Chau;
 namespace Ui {
 class nuevo;
 }
@@ -15,8 +17,7 @@ class nuevo : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit nuevo(QWidget *parent = 0);
-    void teEscribo(&QString dato);
+    explicit nuevo(Chau *esta, QWidget *parent = 0);
     ~nuevo();
 
 private slots:
@@ -26,6 +27,7 @@ private slots:
 
 private:
     Ui::nuevo *ui;
+    Chau *miChau;
 };
 
 #endif // NUEVO_H

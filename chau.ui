@@ -199,6 +199,7 @@
     <addaction name="actionNuevo"/>
     <addaction name="actionVisualizar"/>
     <addaction name="actionExportar"/>
+    <addaction name="actionMotivos"/>
    </widget>
    <addaction name="menuMenu"/>
   </widget>
@@ -220,6 +221,11 @@
   <action name="actionExportar">
    <property name="text">
     <string>Exportar</string>
+   </property>
+  </action>
+  <action name="actionMotivos">
+   <property name="text">
+    <string>Motivos</string>
    </property>
   </action>
  </widget>

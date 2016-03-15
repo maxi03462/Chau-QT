@@ -11,6 +11,7 @@
 #include <QFile>
 #include <QTextStream>
 
+class nuevo;
 namespace Ui {
 class Chau;
 }
@@ -21,6 +22,7 @@ class Chau : public QMainWindow
 
 public:
     explicit Chau(QWidget *parent = 0);
+    void SettablaActual(QString tabla);
     ~Chau();
 
 private slots:
@@ -32,10 +34,11 @@ private slots:
 
     void on_actionExportar_triggered();
 
-    void creartabla1();
-    void creartabla2();
+    void creartabla();
 
-    void tablaActual(QString tabla);
+    void on_actionMotivos_triggered();
+
+    void cargarmotivos();
 private:
     Ui::Chau *ui;
     QSqlDatabase db;
