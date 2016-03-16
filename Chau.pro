@@ -15,15 +15,18 @@ TEMPLATE = app
 SOURCES += main.cpp\
         chau.cpp \
     nuevo.cpp \
-    nuevomotivo.cpp
+    nuevomotivo.cpp \
+    visualizar_lista.cpp
 
 HEADERS  += chau.h \
     nuevo.h \
-    nuevomotivo.h
+    nuevomotivo.h \
+    visualizar_lista.h
 
 FORMS    += chau.ui \
     nuevo.ui \
-    nuevomotivo.ui
+    nuevomotivo.ui \
+    visualizar_lista.ui
 
 CONFIG += mobility
 MOBILITY = 

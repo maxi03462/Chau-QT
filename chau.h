@@ -3,6 +3,7 @@
 
 #include "nuevo.h"
 #include "nuevomotivo.h"
+#include "visualizar_lista.h"
 #include <QMainWindow>
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
@@ -26,6 +27,7 @@ class Chau : public QMainWindow
 public:
     explicit Chau(QWidget *parent = 0);
     void SettablaActual(QString tabla);
+    void contar();
     ~Chau();
 
 private slots:
@@ -52,13 +54,12 @@ private slots:
 
     void on_pushButton_clicked();
 
-    void contar();
-
 private:
     Ui::Chau *ui;
     QSqlDatabase db;
     nuevo *ventana;
     NuevoMotivo *ventanamotivo;
+    Visualizar_lista *verlista;
 
 };
 

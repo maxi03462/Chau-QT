@@ -30,7 +30,8 @@ Chau::~Chau()
 
 void Chau::on_actionListas_triggered()
 {
-
+    verlista = new Visualizar_lista();
+    verlista->showMaximized();
 }
 
 void Chau::primertablar()
@@ -221,4 +222,5 @@ void Chau::contar()
         Total += tmp;
     }
     ui->label_3->setText(QString::number(Total, 'f', 2));
+    ui->Lista_actual->setText(BaseActual());
 }

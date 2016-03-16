@@ -57,6 +57,7 @@ void nuevo::on_pushButton_2_clicked()
         qDebug() << "Se creo la entrada";
         ui->label_2->setText("Todo OK");
         miChau->SettablaActual(nombre);
+        miChau->contar();
             close();
     }
     else{
