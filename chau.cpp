@@ -7,6 +7,10 @@ Chau::Chau(QWidget *parent) :
     ui(new Ui::Chau)
 {
     ui->setupUi(this);
+
+    ui->lineEdit->setInputMethodHints(Qt::ImhPreferNumbers);
+    ui->lineEdit->setInputMethodHints(Qt::ImhFormattedNumbersOnly);
+
     /*-crear/cargar base de datos----------------------------------*/
     QString nombreSQL = "Chau.sqlite";
     db = QSqlDatabase::addDatabase("QSQLITE");
@@ -16,6 +20,7 @@ Chau::Chau(QWidget *parent) :
     cargarmotivos();
     primertablar();
     ui->Lista_actual->setText(BaseActual());
+    contar();
 }
 
 Chau::~Chau()
@@ -199,4 +204,21 @@ void Chau::on_pushButton_clicked()
         QSqlQuery Insertar;
         qDebug() << "se creo??" << Insertar.exec(Consulta);
     }
+}
+
+void Chau::contar()
+{
+    QString Basededatos = BaseActual();
+    QSqlQuery consultar;
+    float Total = 0;
+    QString consulta ="SELECT * FROM '";
+    consulta += Basededatos;
+    consulta += "';";
+    consultar.exec(consulta);
+    while (consultar.next()) {
+        QString tmp2 = consultar.value(2).toString();
+        float tmp = consultar.value(2).toFloat();
+        Total += tmp;
+    }
+    ui->label_3->setText(QString::number(Total, 'f', 2));
 }

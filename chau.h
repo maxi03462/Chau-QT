@@ -49,7 +49,10 @@ private slots:
     void on_pushButton_2_clicked();
 
     QString BaseActual();
+
     void on_pushButton_clicked();
+
+    void contar();
 
 private:
     Ui::Chau *ui;
