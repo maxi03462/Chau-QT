@@ -61,7 +61,65 @@ void Chau::on_actionNuevo_triggered()
 
 void Chau::on_actionExportar_triggered()
 {
+    QList<QString> Tablas;
 
+    QString consulta ="SELECT * FROM 'L!s74'";
+    QSqlQuery consultar;
+    consultar.prepare(consulta);
+    consultar.exec();
+    while(consultar.next()){
+        Tablas << consultar.value(0).toString();
+    }
+    int total = Tablas.count();
+            for (int var = 0; var < total; ++var) {
+        Exportar(Tablas[var]);
+    }
+}
+
+void Chau::Exportar(QString Nombre)
+{
+    QString Dir;// = "/storage/emulated/0/";
+    Dir += Nombre;
+    Dir += ".csv";
+    QFile file(Dir);
+    file.open(QIODevice::Text | QIODevice::Append);
+    QTextStream out(&file);
+
+    QString consulta ="SELECT * FROM '";
+    consulta += Nombre;
+    consulta += "';";
+    QSqlQuery consultar;
+    consultar.prepare(consulta);
+    consultar.exec();
+
+    QDate date = QDate::currentDate();
+    QString Fecha = date.toString("dd/MM/yyyy");
+
+    out << "Exportado el dia:" << Fecha << "\n";
+    out << "Dir;Hora;$;Motivo;Detalle;Gasto o Ganancia \n";
+
+    while(consultar.next()){
+        out << consultar.value(0).toString() << ";" << consultar.value(1).toString() << ";";
+
+        if ((consultar.value(5).toString()) == "1"){
+            out << "-" << consultar.value(2).toString();
+        }
+        else
+        {
+            out << "+" << consultar.value(2).toString();
+        }
+
+        out << ";" << consultar.value(3).toString() << ";" << consultar.value(4).toString() << ";";
+
+        if ((consultar.value(5).toString()) == "1"){
+            out << "Gasto" << "\n";
+        }
+        else
+        {
+            out << "Ganancia" << "\n";
+        }
+    }
+    file.close();
 }
 
 void Chau::creartabla()                     //Se crean las tablas lista y motivo
@@ -225,9 +283,15 @@ void Chau::contar()                         //Me da el valor Total
     consulta += "';";
     consultar.exec(consulta);
     while (consultar.next()) {
-        QString tmp2 = consultar.value(2).toString();
-        float tmp = consultar.value(2).toFloat();
-        Total += tmp;
+    float tmp = consultar.value(2).toFloat();
+
+        if ((consultar.value(5).toString()) == "1"){
+            Total -= tmp;
+        }
+        else
+        {
+            Total += tmp;
+        }
     }
     ui->label_3->setText(QString::number(Total, 'f', 2));
     ui->Lista_actual->setText(BaseActual());

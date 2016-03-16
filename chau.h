@@ -54,6 +54,8 @@ private slots:
 
     void ActualizarDatos();
 
+    void Exportar(QString Nombre);
+
 private:
     Ui::Chau *ui;
     QSqlDatabase db;
