@@ -38,10 +38,9 @@ void nuevo::on_pushButton_2_clicked()
     }
 
     if(!coincidencia){
-    //CREATE TABLE IF NOT EXISTS 'L!s74'(dia VARCHAR(255),hora VARCHAR(255),gasto VARCHAR(255),comentario VARCHAR(255),ok INT);
     QString Consulta ="CREATE TABLE IF NOT EXISTS '";
     Consulta.append(nombre);
-    Consulta.append("'(dia VARCHAR(255),hora VARCHAR(255),gasto VARCHAR(255),comentario VARCHAR(255),ok INT);");
+    Consulta.append("'(dia VARCHAR(255),hora VARCHAR(255),gasto VARCHAR(255),motivo VARCHAR(255),detalle VARCHAR(255),ok VARCHAR(255));");
     QSqlQuery crear;
     qDebug() << Consulta;
     qDebug() << "Se creo la tabla " << nombre << "?" << crear.exec(Consulta);
