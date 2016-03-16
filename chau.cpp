@@ -28,10 +28,11 @@ Chau::~Chau()
     delete ui;
 }
 
-void Chau::on_actionListas_triggered()
+void Chau::on_actionListas_triggered()      //Pantalla de las listas
 {
     verlista = new Visualizar_lista();
     verlista->showMaximized();
+    QObject::connect(verlista, SIGNAL(HayActualizacion()),this, SLOT(ActualizarDatos()));
 }
 
 void Chau::primertablar()
@@ -58,17 +59,12 @@ void Chau::on_actionNuevo_triggered()
     ventana->showMaximized();
 }
 
-void Chau::on_actionVisualizar_triggered()
-{
-
-}
-
 void Chau::on_actionExportar_triggered()
 {
 
 }
 
-void Chau::creartabla()
+void Chau::creartabla()                     //Se crean las tablas lista y motivo
 {
     // CREATE TABLE IF NOT EXISTS 'L!s74'(dia VARCHAR(255),hora VARCHAR(255),gasto VARCHAR(255),comentario VARCHAR(255),ok VARCHAR(255));
     // creamos la tabla para la lista de las tablas
@@ -93,7 +89,7 @@ void Chau::creartabla()
     }
 }
 
-void Chau::SettablaActual(QString tabla)
+void Chau::SettablaActual(QString tabla)    //Setea la tabla sobre la cual trabajar
 {
     QFile file("List.info");
     file.open(QIODevice::Text | QIODevice::WriteOnly);
@@ -102,13 +98,13 @@ void Chau::SettablaActual(QString tabla)
     file.close();
 }
 
-void Chau::on_actionMotivos_triggered()
+void Chau::on_actionMotivos_triggered()     //Pantalla de los motivos
 {
     ventanamotivo = new NuevoMotivo();
     ventanamotivo->showMaximized();
 }
 
-void Chau::cargarmotivos()
+void Chau::cargarmotivos()                  //obtiene los motivos listados
 {
     int a = ui->comboBox->count();
     for (int var = 0; var < a; ++var) {
@@ -123,7 +119,17 @@ void Chau::cargarmotivos()
 
 }
 
-void Chau::on_pushButton_2_clicked() //Gasto
+QString Chau::BaseActual()                  //Me dice que Base se esta usando
+{
+    QFile file("List.info");
+    file.open(QIODevice::ReadOnly);
+    QTextStream in(&file);
+    QString Basededatos = in.readLine();
+    file.close();
+    return Basededatos;
+}
+
+void Chau::on_pushButton_2_clicked()        //Gasto
 {
     /*----------------------------------------------*/
     QTime time = QTime::currentTime();
@@ -157,20 +163,13 @@ void Chau::on_pushButton_2_clicked() //Gasto
         qDebug() << Consulta;
         QSqlQuery Insertar;
         qDebug() << "se creo??" << Insertar.exec(Consulta);
+        ui->lineEdit->setText("");
+        ui->lineEdit_2->setText("");
+        contar();
     }
 }
 
-QString Chau::BaseActual()
-{
-    QFile file("List.info");
-    file.open(QIODevice::ReadOnly);
-    QTextStream in(&file);
-    QString Basededatos = in.readLine();
-    file.close();
-    return Basededatos;
-}
-
-void Chau::on_pushButton_clicked()
+void Chau::on_pushButton_clicked()          //Ganancia
 {
     /*----------------------------------------------*/
     QTime time = QTime::currentTime();
@@ -204,10 +203,19 @@ void Chau::on_pushButton_clicked()
         qDebug() << Consulta;
         QSqlQuery Insertar;
         qDebug() << "se creo??" << Insertar.exec(Consulta);
+        ui->lineEdit->setText("");
+        ui->lineEdit_2->setText("");
+        contar();
     }
 }
 
-void Chau::contar()
+void Chau::ActualizarDatos()                //Me actualiza los datos cuando cambio de base
+{
+    ui->Lista_actual->setText(BaseActual());
+    contar();
+}
+
+void Chau::contar()                         //Me da el valor Total
 {
     QString Basededatos = BaseActual();
     QSqlQuery consultar;

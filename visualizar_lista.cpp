@@ -21,12 +21,23 @@ Visualizar_lista::~Visualizar_lista()
 
 void Visualizar_lista::artualizarcombo()
 {
+    int Cantidad = ui->comboBox->count();
+    for (int var = 0; var < Cantidad; ++var) {
+        ui->comboBox->removeItem(var);
+    }
+    QString Basededatos = BaseActual();
+    ui->comboBox->addItem(Basededatos);
+    Lista << Basededatos;
+
     QString C = "SELECT * FROM 'L!s74';";
     QSqlQuery Pregunta;
     qDebug() << "Se pregunto bien?" << Pregunta.exec(C);
     while (Pregunta.next()){
-    ui->comboBox->addItem(Pregunta.value(0).toString());
+    QString item = Pregunta.value(0).toString();
+    if (item != Basededatos){
+    ui->comboBox->addItem(item);
     Lista << Pregunta.value(0).toString();
+    }
     }
 }
 
@@ -97,8 +108,36 @@ void Visualizar_lista::on_comboBox_currentTextChanged(const QString &arg1)
     cargarlista(arg1);
 }
 
+
+
+
+
 void Visualizar_lista::on_pushButton_clicked()
 {
-    QString Seleccion = ui->comboBox->currentText();
-    SettablaActual(Seleccion);
+    SettablaActual(ui->comboBox->currentText());
+    emit this->HayActualizacion();
+    close();
+}
+
+void Visualizar_lista::on_tableWidget_cellDoubleClicked(int row, int column)
+{
+    QString Tabla = ui->label_2->text();
+
+    QTableWidgetItem *Temp;
+    Temp= ui->tableWidget->item(row,0);
+    QString Dia = Temp->text();
+    Temp = ui->tableWidget->item(row,1);
+    QString Hora = Temp->text();
+
+    QString Borra = "DELETE FROM `";
+    Borra += Tabla;
+    Borra += "` WHERE `dia`='";
+    Borra += Dia;
+    Borra += "'  AND `hora`='";
+    Borra += Hora;
+    Borra += "';";
+
+    QSqlQuery Actuar;
+    Actuar.exec(Borra);
+    cargarlista(Tabla);
 }

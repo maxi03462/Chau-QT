@@ -26,13 +26,21 @@ private:
 
 private slots:
     void artualizarcombo();
+
     void SettablaActual(QString tabla);
 
     QString BaseActual();
 
     void cargarlista(QString Basededatos);
+
     void on_comboBox_currentTextChanged(const QString &arg1);
+
     void on_pushButton_clicked();
+
+    void on_tableWidget_cellDoubleClicked(int row, int column);
+
+signals:
+    void HayActualizacion();
 };
 
 #endif // VISUALIZAR_LISTA_H

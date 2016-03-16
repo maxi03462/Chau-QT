@@ -232,7 +232,6 @@
     </property>
     <addaction name="actionListas"/>
     <addaction name="actionNuevo"/>
-    <addaction name="actionVisualizar"/>
     <addaction name="actionExportar"/>
     <addaction name="actionMotivos"/>
    </widget>

@@ -34,8 +34,6 @@ private slots:
 
     void on_actionNuevo_triggered();
 
-    void on_actionVisualizar_triggered();
-
     void on_actionExportar_triggered();
 
     void creartabla();
@@ -53,6 +51,8 @@ private slots:
     QString BaseActual();
 
     void on_pushButton_clicked();
+
+    void ActualizarDatos();
 
 private:
     Ui::Chau *ui;
