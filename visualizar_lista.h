@@ -8,6 +8,7 @@
 #include <QtSql/QSqlQuery>
 #include <QtSql/QSqlError>
 #include <QFile>
+#include <QMessageBox>
 
 namespace Ui {
 class Visualizar_lista;
@@ -38,6 +39,8 @@ private slots:
     void on_pushButton_clicked();
 
     void on_tableWidget_cellDoubleClicked(int row, int column);
+
+    void on_pushButton_2_clicked();
 
 signals:
     void HayActualizacion();

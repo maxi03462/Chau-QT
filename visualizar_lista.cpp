@@ -21,12 +21,10 @@ Visualizar_lista::~Visualizar_lista()
 
 void Visualizar_lista::artualizarcombo()
 {
-    int Cantidad = ui->comboBox->count();
-    for (int var = 0; var < Cantidad; ++var) {
-        ui->comboBox->removeItem(var);
-    }
+    ui->comboBox->clear();
     QString Basededatos = BaseActual();
     ui->comboBox->addItem(Basededatos);
+    Lista.clear();
     Lista << Basededatos;
 
     QString C = "SELECT * FROM 'L!s74';";
@@ -108,10 +106,6 @@ void Visualizar_lista::on_comboBox_currentTextChanged(const QString &arg1)
     cargarlista(arg1);
 }
 
-
-
-
-
 void Visualizar_lista::on_pushButton_clicked()
 {
     SettablaActual(ui->comboBox->currentText());
@@ -140,4 +134,58 @@ void Visualizar_lista::on_tableWidget_cellDoubleClicked(int row, int column)
     QSqlQuery Actuar;
     Actuar.exec(Borra);
     cargarlista(Tabla);
+}
+
+void Visualizar_lista::on_pushButton_2_clicked()
+{
+    QString Tabla = ui->comboBox->currentText();
+    if (Tabla =="Principal"){
+        QMessageBox msgBox;
+        msgBox.setIcon(QMessageBox::Information);
+        msgBox.setText("No se puede borrar esta lista");
+        msgBox.setStandardButtons(QMessageBox::Ok);
+        msgBox.exec();
+    }
+    else
+    {
+     QMessageBox Consulta;
+     Consulta.setIcon(QMessageBox::Information);
+     Consulta.setText("Esta seguro?");
+     Consulta.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+     if (Consulta.exec() == QMessageBox::Yes){
+         QString Borra = "DROP TABLE `";
+         Borra += Tabla;
+         Borra += "`;";
+         QSqlQuery Ejecutar;
+         qDebug() << "Se Borro la tabla? " << Ejecutar.exec(Borra);
+         /*--------- Se borro la tabla ---------------------*/
+
+         Borra = "DELETE FROM `L!s74` WHERE `listado`='";
+         Borra += Tabla;
+         Borra += "';";
+         QSqlQuery Borrar;
+         qDebug() << "Se Borro la entrada del listado? "  <<  Borrar.exec(Borra);
+         /*--------- Se borro la entrada del listado ---------------------*/
+
+         QMessageBox msgBox;
+         msgBox.setIcon(QMessageBox::Information);
+         QString Mensaje = "Se borro la lista ";
+         Mensaje += Tabla;
+         msgBox.setText(Mensaje);
+         msgBox.setStandardButtons(QMessageBox::Ok);
+         msgBox.exec();
+
+         QString Basededatos = BaseActual();
+         if (Basededatos == Tabla){
+             SettablaActual("Principal");
+             cargarlista("Principal");
+             artualizarcombo();
+             emit this->HayActualizacion();
+         }
+         else{
+             artualizarcombo();
+             cargarlista(Basededatos);
+     }
+     }
+     }
 }
