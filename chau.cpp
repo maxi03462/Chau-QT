@@ -53,13 +53,13 @@ void Chau::primertablar()
     }
 }
 
-void Chau::on_actionNuevo_triggered()
+void Chau::on_actionNuevo_triggered()       //Ventana de las listas nuevas
 {
     ventana = new nuevo(this,this);
     ventana->showMaximized();
 }
 
-void Chau::on_actionExportar_triggered()
+void Chau::on_actionExportar_triggered()    //Exportar datos
 {
     QList<QString> Tablas;
 
@@ -76,7 +76,7 @@ void Chau::on_actionExportar_triggered()
     }
 }
 
-void Chau::Exportar(QString Nombre)
+void Chau::Exportar(QString Nombre)         //Funcion utilizada en exportar
 {
     QString Dir;// = "/storage/emulated/0/";
     Dir += Nombre;
@@ -160,6 +160,7 @@ void Chau::on_actionMotivos_triggered()     //Pantalla de los motivos
 {
     ventanamotivo = new NuevoMotivo();
     ventanamotivo->showMaximized();
+    QObject::connect(ventanamotivo, SIGNAL(HayMotivosNuevos()),this, SLOT(cargarmotivos()));
 }
 
 void Chau::cargarmotivos()                  //obtiene los motivos listados

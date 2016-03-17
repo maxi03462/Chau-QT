@@ -46,6 +46,7 @@ void NuevoMotivo::on_pushButton_2_clicked()
         ui->lineEdit->setText("");
         ui->label_3->setText("OK");
         cargarmotivos();
+        emit this->HayMotivosNuevos();
         }
         }
     }

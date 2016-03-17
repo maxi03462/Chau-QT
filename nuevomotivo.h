@@ -32,6 +32,9 @@ private slots:
 
 private:
     Ui::NuevoMotivo *ui;
+
+signals:
+    void HayMotivosNuevos();
 };
 
 #endif // NUEVOMOTIVO_H
