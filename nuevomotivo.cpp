@@ -23,7 +23,7 @@ void NuevoMotivo::on_pushButton_clicked()
     close();
 }
 
-void NuevoMotivo::on_pushButton_2_clicked()
+void NuevoMotivo::on_pushButton_2_clicked()                             //Añadir motivo
 {
     if((ui->lineEdit->text())!=""){
         QString Nombre = ui->lineEdit->text();
@@ -38,7 +38,7 @@ void NuevoMotivo::on_pushButton_2_clicked()
             ui->label_3->setText("Ya Existe");
         }
         else{
-            QString Carga = "INSERT INTO 'M0TIV0S'('motivo')VALUES('" ;
+        QString Carga = "INSERT INTO 'M0TIV0S'('motivo')VALUES('" ;
         Carga += Nombre;
         Carga += "');";
         QSqlQuery Cargar;
@@ -52,22 +52,20 @@ void NuevoMotivo::on_pushButton_2_clicked()
     }
 }
 
-void NuevoMotivo::cargarmotivos()
+void NuevoMotivo::cargarmotivos()                                       //Actualizar combobox
 {
-        int a = ui->comboBox->count();
-        for (int var = 0; var < a; ++var) {
-            ui->comboBox->removeItem(var);
-        }
+        Listado.clear();
+        ui->comboBox->clear();
         QString C = "SELECT * FROM M0TIV0S;";
         QSqlQuery Pregunta;
         qDebug() << "Se pregunto bien?" << Pregunta.exec(C);
         while (Pregunta.next()){
         ui->comboBox->addItem(Pregunta.value(0).toString());
         Listado << Pregunta.value(0).toString();
-        }
+      }
 }
 
-void NuevoMotivo::on_pushButton_3_clicked()
+void NuevoMotivo::on_pushButton_3_clicked()                             //eliminar motivo
 {
     QString Seleccion = ui->comboBox->currentText();
     if (Seleccion != "Otros"){
@@ -79,6 +77,8 @@ void NuevoMotivo::on_pushButton_3_clicked()
         if (Pregunta.exec(C)){
             Seleccion = "Se elimino " + Seleccion;
             ui->label_3->setText(Seleccion);
+            cargarmotivos();
+            emit this->HayMotivosNuevos();
         }
     }
     else

@@ -165,10 +165,7 @@ void Chau::on_actionMotivos_triggered()     //Pantalla de los motivos
 
 void Chau::cargarmotivos()                  //obtiene los motivos listados
 {
-    int a = ui->comboBox->count();
-    for (int var = 0; var < a; ++var) {
-        ui->comboBox->removeItem(var);
-    }
+    ui->comboBox->clear();
     QString C = "SELECT * FROM M0TIV0S;";
     QSqlQuery Pregunta;
     qDebug() << "Se pregunto bien?" << Pregunta.exec(C);
