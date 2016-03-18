@@ -78,35 +78,49 @@ void Chau::on_actionExportar_triggered()    //Exportar datos
 
 void Chau::Exportar(QString Nombre)         //Funcion utilizada en exportar
 {
-    QString Dir;// = "/storage/emulated/0/";
-    Dir += Nombre;
+    QString Dir  =  "/storage/emulated/0/Chau/";
+
+    QDir dir(Dir);
+    if (!dir.exists()) {
+        qDebug() << dir.mkpath(Dir);
+    }
+
+    QString nombre = Nombre;
+    nombre.replace(QString("/"), QString("-"));
+    Dir += nombre;
     Dir += ".csv";
+    qDebug() << Dir;
     QFile file(Dir);
-    file.open(QIODevice::Text | QIODevice::Append);
+    file.open(QIODevice::Text | QIODevice::WriteOnly);
     QTextStream out(&file);
 
     QString consulta ="SELECT * FROM '";
     consulta += Nombre;
     consulta += "';";
     QSqlQuery consultar;
-    consultar.prepare(consulta);
-    consultar.exec();
+    qDebug() << consulta;
+    qDebug() << consultar.exec(consulta);
 
     QDate date = QDate::currentDate();
     QString Fecha = date.toString("dd/MM/yyyy");
 
     out << "Exportado el dia:" << Fecha << "\n";
-    out << "Dir;Hora;$;Motivo;Detalle;Gasto o Ganancia \n";
+    out << "Dia;Hora;$;Motivo;Detalle;Gasto o Ganancia \n";
 
+    int Pasadas = 0;
     while(consultar.next()){
         out << consultar.value(0).toString() << ";" << consultar.value(1).toString() << ";";
 
         if ((consultar.value(5).toString()) == "1"){
-            out << "-" << consultar.value(2).toString();
+            QString Pesos =consultar.value(2).toString();
+            Pesos.replace(QString("."), QString(","));
+            out << "-" << Pesos;
         }
         else
         {
-            out << "+" << consultar.value(2).toString();
+            QString Pesos =consultar.value(2).toString();
+            Pesos.replace(QString("."), QString(","));
+            out << "+" << Pesos;
         }
 
         out << ";" << consultar.value(3).toString() << ";" << consultar.value(4).toString() << ";";
@@ -118,6 +132,13 @@ void Chau::Exportar(QString Nombre)         //Funcion utilizada en exportar
         {
             out << "Ganancia" << "\n";
         }
+        Pasadas++;
+    }
+    if (Pasadas != 0){
+    out << ";Total:;=SUMA(C3:C" ;
+    Pasadas += 2;
+    out << QString::number(Pasadas);
+    out << ");;;";
     }
     file.close();
 }
