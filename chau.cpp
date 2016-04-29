@@ -296,13 +296,13 @@ void Chau::contar()                         //Me da el valor Total
 {
     QString Basededatos = BaseActual();
     QSqlQuery consultar;
-    float Total = 0;
+    double Total = 0;
     QString consulta ="SELECT * FROM '";
     consulta += Basededatos;
     consulta += "';";
     consultar.exec(consulta);
     while (consultar.next()) {
-    float tmp = consultar.value(2).toFloat();
+    float tmp = consultar.value(2).toDouble();
 
         if ((consultar.value(5).toString()) == "1"){
             Total -= tmp;
@@ -312,6 +312,6 @@ void Chau::contar()                         //Me da el valor Total
             Total += tmp;
         }
     }
-    ui->label_3->setText(QString::number(Total, 'f', 2));
+    ui->label_3->setText(QString::number(Total, 'd', 2));
     ui->Lista_actual->setText(BaseActual());
 }
