@@ -123,17 +123,28 @@ void Visualizar_lista::on_tableWidget_cellDoubleClicked(int row, int column)
     Temp = ui->tableWidget->item(row,1);
     QString Hora = Temp->text();
 
-    QString Borra = "DELETE FROM `";
-    Borra += Tabla;
-    Borra += "` WHERE `dia`='";
-    Borra += Dia;
-    Borra += "'  AND `hora`='";
-    Borra += Hora;
-    Borra += "';";
+    QMessageBox msgBox;
+    msgBox.setIcon(QMessageBox::Information);
+    msgBox.setText("Esta seguro de que lo desea borrar?");
+    msgBox.setStandardButtons(QMessageBox::Cancel |QMessageBox::Yes);
+    int ret = msgBox.exec();
 
-    QSqlQuery Actuar;
-    Actuar.exec(Borra);
-    cargarlista(Tabla);
+    switch (ret) {
+      case QMessageBox::Yes:
+        QString Borra = "DELETE FROM `";
+        Borra += Tabla;
+        Borra += "` WHERE `dia`='";
+        Borra += Dia;
+        Borra += "'  AND `hora`='";
+        Borra += Hora;
+        Borra += "';";
+
+        QSqlQuery Actuar;
+        Actuar.exec(Borra);
+        cargarlista(Tabla);
+        emit this->HayActualizacion();
+          break;
+    }
 }
 
 void Visualizar_lista::on_pushButton_2_clicked()
